@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const fullText = body.textContent.trim();
         const words = fullText.split(" ");
 
-        if (words.length > 15) {
-            const truncatedText = words.slice(0, 15).join(" ") + "... ";
+        if (words.length > 30) {
+            const truncatedText = words.slice(0, 30).join(" ") + "... ";
             const seeMoreLink = document.createElement("a");
             seeMoreLink.href = "#";
             seeMoreLink.textContent = "See more";
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Create the "See Less" link
                     const seeLessLink = document.createElement("a");
                     seeLessLink.href = "#";
-                    seeLessLink.textContent = " ...See less";
+                    seeLessLink.textContent = " See less";
                     seeLessLink.style.textDecoration = "none";
                     seeLessLink.style.color = "black";
 

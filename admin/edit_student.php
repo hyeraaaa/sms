@@ -39,7 +39,7 @@ $department_id = $_SESSION['user']['department_id'];
         <div class="container-fluid pt-5">
             <div class="row g-4">
                 <!-- Sidebar -->
-                <?php include '../cdn/sidebar.php'; ?> <!-- Assuming sidebar is in a separate file -->
+                <?php include '../cdn/sidebar.php'; ?>
 
                 <!-- Main content -->
                 <div class="col-md-6 pt-5 px-5">

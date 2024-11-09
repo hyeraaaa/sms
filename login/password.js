@@ -2,7 +2,7 @@ const togglePassword = document.querySelector("#togglePassword");
 const password = document.querySelector("#password");
 
 password.addEventListener("input", function(){
-    if (password.value.length >= 6){
+    if (password.value.length >= 8){
         togglePassword.classList.remove("d-none");
     } else {
         togglePassword.classList.add("d-none");

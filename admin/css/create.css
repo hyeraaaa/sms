@@ -1,3 +1,7 @@
+.form-container form{
+    width: 60%;
+}
+
 .upload-image-container {
     position: relative;
     border-radius: 20px;
@@ -36,10 +40,6 @@
     bottom: 0;
     background-color: rgba(255, 255, 255, 0.6); 
     z-index: 1; 
-}
-
-.form-container form{
-    width: 75%;
 }
 
 #file-upload-btn {

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-white text-black fixed-top mb-5">
+<nav class="navbar navbar-expand-lg bg-white text-black fixed-top mb-5" style="border-bottom: 1px solid rgba(0, 0, 0, 0.3);">
     <div class="container-fluid">
         <div class="user-left d-flex">
             <div class="d-md-none ms-0 mt-2 me-3">

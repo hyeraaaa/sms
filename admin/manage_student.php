@@ -93,20 +93,20 @@ function addNewStudent($s_first_name, $s_last_name, $s_email, $s_contact_number,
         // Send email with password setup link
         $mail = new PHPMailer(true);
         // Server settings
-        $mail->isSMTP();                                 
-        $mail->Host = 'smtp.gmail.com';                  
-        $mail->SMTPAuth = true;                          
-        $mail->Username = 'ranonline1219@gmail.com';      
-        $mail->Password = 'cavv jhhh onzy rwiu';         
-        $mail->SMTPSecure = 'tls';                       
-        $mail->Port = 587;                               
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ranonline1219@gmail.com';
+        $mail->Password = 'cavv jhhh onzy rwiu';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
         // Recipients
         $mail->setFrom('ranonline1219@gmail.com', 'ISMS - BSU Announcement Portal');
-        $mail->addAddress($s_email);                     
+        $mail->addAddress($s_email);
 
         // Content
-        $mail->isHTML(true);                             
+        $mail->isHTML(true);
         $mail->Subject = 'Your Account for the ISMS Portal was created successfully';
         $setupLink = "localhost/I-SMS/admin/setup_password.php?token=" . $token;
         $mail->Body = "Your account was created successfully. <br> 
@@ -136,8 +136,8 @@ function addNewStudent($s_first_name, $s_last_name, $s_email, $s_contact_number,
 
     <!-- head CDN links -->
     <?php include '../cdn/head.html'; ?>
-    <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="modals.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/modals.css">
 </head>
 
 <body>
@@ -178,25 +178,30 @@ function addNewStudent($s_first_name, $s_last_name, $s_email, $s_contact_number,
         <div class="container-fluid pt-5">
             <div class="row g-4">
                 <!-- left sidebar -->
-                <div class="col-md-3 d-none d-md-block">
-                    <div class="sticky-sidebar pt-5">
+                <div class="col-md-2 sidebars sidebar-left d-none d-md-block">
+                    <div class="sticky-sidebar pt-5 m-0">
                         <div class="sidebar">
-                            <div class="card">
-                                <div class="card-body d-flex flex-column">
-                                    <a href="admin.php" class="btn mb-3"><i class="bi bi-house"></i> Home</a>
-                                    <a class="btn mb-3" href="create.php"><i class="bi bi-megaphone"></i> Create Announcement</a>
-                                    <a class="btn mb-3" href="manage.php"><i class="bi bi-kanban"></i> Manage Post</a>
-                                    <a class="btn mb-3" href="#"><i class="bi bi-clipboard"></i> Logs</a>
-                                    <a class="btn active mb-3" href="#"><i class="bi bi-person-plus"></i> Manage Student Account</a>
+                            <div class="left-card">
+                                <div class="d-flex flex-column">
+                                    <a href="admin.php" class="btn nav-btn mb-3"><i class="bi bi-house"></i> Home</a>
+                                    <a class="btn nav-btn mb-3" href="manage.php"><i class="bi bi-kanban"></i> Manage Post</a>
+                                    <a class="btn nav-btn mb-3" href="create.php"><i class="bi bi-megaphone"></i> Create Announcement</a>
+                                    <a class="btn nav-btn mb-3" href="#"><i class="bi bi-clipboard"></i> Logs</a>
+                                    <a class="btn active nav-btn" href="manage_student.php"><i class="bi bi-person-plus"></i> Manage Student Account</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- main content -->
-                <div class="col-md-8 pt-5 px-5">
+                <div class="col-md-10 pt-5 px-5">
                     <div class="feed-container">
-                        <button class="btn btn-primary" id="addNewStudent" data-bs-toggle="modal" data-bs-target="#studentModal">Add new student</button>
+                        <div class="button-container d-flex w-100 align-items-center">
+                            <button class="btn btn-primary mb-3 me-2" id="addNewStudent" data-bs-toggle="modal" data-bs-target="#studentModal">Add new student</button>
+                            <label for="excel" class="btn mb-3 me-2">Import Student</label>
+                            <input type="file" name="file" id="excel" style="display: none;">
+                        </div>
+
 
                         <?php
                         require_once '../login/dbh.inc.php';

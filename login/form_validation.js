@@ -10,7 +10,7 @@ $(document).ready(function(){
 
             password:{
                 required: true,
-                minlength: 6
+                minlength: 8
             }
 
         },
@@ -37,7 +37,7 @@ $(document).ready(function(){
 
             password:{
                 required: true,
-                minlength: 6
+                minlength: 8
             }
 
         },

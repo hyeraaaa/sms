@@ -28,8 +28,8 @@ $department_id = $_SESSION['user']['department_id'];
 
     <!-- head CDN links -->
     <?php include '../cdn/head.html'; ?>
-    <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="modals.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/modals.css">
 </head>
 
 <body>
@@ -90,23 +90,43 @@ $department_id = $_SESSION['user']['department_id'];
         <div class="container-fluid pt-5">
             <div class="row g-4">
                 <!-- left sidebar -->
-                <div class="col-md-3 d-none d-md-block">
-                    <div class="sticky-sidebar pt-5">
+                <div class="col-md-2 sidebars sidebar-left d-none d-md-block">
+                    <div class="sticky-sidebar pt-5 m-0">
                         <div class="sidebar">
-                            <div class="card">
-                                <div class="card-body d-flex flex-column">
-                                    <a href="admin.php" class="btn active mb-3"><i class="bi bi-house"></i> Home</a>
-                                    <a class="btn mb-3" href="create.php"><i class="bi bi-megaphone"></i> Create Announcement</a>
-                                    <a class="btn mb-3" href="manage.php"><i class="bi bi-kanban"></i> Manage Post</a>
-                                    <a class="btn mb-3" href="#"><i class="bi bi-clipboard"></i> Logs</a>
-                                    <a class="btn" href="manage_student.php"><i class="bi bi-person-plus"></i> Manage Student Account</a>
+                            <div class="left-card">
+                                <div class="d-flex flex-column">
+                                    <a href="admin.php" class="btn nav-btn active mb-3"><i class="bi bi-house"></i> Home</a>
+                                    <a class="btn nav-btn mb-3" href="manage.php"><i class="bi bi-kanban"></i> Manage Post</a>
+                                    <a class="btn nav-btn mb-3" href="create.php"><i class="bi bi-megaphone"></i> Create Announcement</a>
+                                    <a class="btn nav-btn mb-3" href="#"><i class="bi bi-clipboard"></i> Logs</a>
+                                    <a class="btn nav-btn" href="manage_student.php"><i class="bi bi-person-plus"></i> Manage Student Account</a>
                                 </div>
                             </div>
+
+                            <!-- <h5 class="text-center card-title">Announcements Filter</h5> -->
+                            <!-- <form class="filtered_option d-flex flex-column" action="">
+                                <label>Choose Department</label>
+                                <div class="checkbox-group mb-3">
+                                    <label><input type="checkbox" name="department_filter" value="1"> CECS</label><br>
+                                    <label><input type="checkbox" name="department_filter" value="2"> CABE</label><br>
+                                    <label><input type="checkbox" name="department_filter" value="3"> CAS</label><br>
+                                </div>
+
+                                <label>Select Year Level</label>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" name="year_level" value="1"> 1st Year</label><br>
+                                    <label><input type="checkbox" name="year_level" value="2"> 2nd Year</label><br>
+                                    <label><input type="checkbox" name="year_level" value="3"> 3rd Year</label><br>
+                                    <label><input type="checkbox" name="year_level" value="4"> 4th Year</label><br>
+
+                                </div>
+                                <button id="filter_sub" type="button" class="btn btn-primary mt-3 text-center">Filter</button>
+                            </form> -->
                         </div>
                     </div>
                 </div>
                 <!-- main content -->
-                <div class="col-md-6 main-content pt-5 px-5">
+                <div class="col-md-7 main-content pt-5 px-5">
                     <div class="feed-container">
                         <?php
                         require_once '../login/dbh.inc.php';
@@ -161,7 +181,7 @@ $department_id = $_SESSION['user']['department_id'];
                                                     <span id="dropdownMenuButton<?php echo $announcement_id; ?>" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="bi bi-three-dots"></i>
                                                     </span>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?php echo $announcement_id; ?>">
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton<?php echo $announcement_id; ?>">
                                                         <li><a class="dropdown-item" href="edit_announcement.php?id=<?php echo $announcement_id; ?>">Edit</a></li>
                                                         <li>
                                                             <a class="dropdown-item text-danger" href="#"
@@ -214,42 +234,56 @@ $department_id = $_SESSION['user']['department_id'];
                     </div>
                 </div>
 
-                <div class="col-md-3 d-none d-md-block">
-                    <div class="sticky-sidebar pt-5">
-                        <div class="filter">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center mb-2">Recent Posts</h5>
-                                    <div class="posts">
-                                        <div class="d-flex mb-3">
-                                            <i class="bi bi-star me-2"></i> <span>JPCS Membership Fee</span>
+                <div class="col-md-4 announcement-card d-none d-xxl-block">
+                    <?php
+                    require_once '../login/dbh.inc.php';
+
+                    try {
+                        $query = "SELECT announcement_id, title FROM announcement ORDER by updated_at DESC LIMIT 3";
+
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute();
+
+                        $announcements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                        <div class="sticky-sidebar pt-5">
+                            <div class="filter">
+                                <div class="card latest-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center mb-2">Recent Posts</h5>
+                                        <div class="posts">
+                                            <?php
+                                            if ($announcements) {
+                                                foreach ($announcements as $row) {
+                                                    $id = $row['announcement_id']; // Get the ID for the announcement
+                                                    $title = $row['title'];
+                                            ?>
+                                                    <div class="d-flex mb-1">
+                                                        <i class="bi bi-star me-2"></i>
+                                                        <a style="color:black; text-decoration: none;" href="try.php?id=<?php echo $id; ?>"><?php echo htmlspecialchars($title); ?></a>
+
+                                                    </div>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo '<p class="text-center">No announcements found.</p>';
+                                            }
+                                            ?>
                                         </div>
-
-                                        <h5 class="text-center card-title">Announcements Filter</h5>
-                                        <form class="filtered_option d-flex flex-column" action="">
-                                            <label>Choose Department</label>
-                                            <div class="checkbox-group mb-3">
-                                                <label><input type="checkbox" name="department_filter" value="1"> CECS</label><br>
-                                                <label><input type="checkbox" name="department_filter" value="2"> CABE</label><br>
-                                                <label><input type="checkbox" name="department_filter" value="3"> CAS</label><br>
-                                            </div>
-
-                                            <label>Select Year Level</label>
-                                            <div class="checkbox-group">
-                                                <label><input type="checkbox" name="year_level" value="1"> 1st Year</label><br>
-                                                <label><input type="checkbox" name="year_level" value="2"> 2nd Year</label><br>
-                                                <label><input type="checkbox" name="year_level" value="3"> 3rd Year</label><br>
-                                                <label><input type="checkbox" name="year_level" value="4"> 4th Year</label><br>
-
-                                            </div>
-                                            <button id="filter_sub" type="button" class="btn btn-primary mt-3">Filter</button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    } catch (PDOException $e) {
+                        // Handle any errors that occur during query execution
+                        echo "Error: " . htmlspecialchars($e->getMessage());
+                    }
+                    ?>
+
                 </div>
+
+
 
                 <script>
                     document.getElementById("filter_sub").addEventListener('click', function() {

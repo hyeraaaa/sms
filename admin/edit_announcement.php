@@ -25,8 +25,8 @@ $department_id = $_SESSION['user']['department_id'];
 
     <!-- Include your head CDN links -->
     <?php include '../cdn/head.html'; ?>
-    <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="create.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/create.css">
 </head>
 
 <body>
@@ -42,7 +42,7 @@ $department_id = $_SESSION['user']['department_id'];
                 <?php include '../cdn/sidebar.php'; ?> <!-- Assuming sidebar is in a separate file -->
 
                 <!-- Main content -->
-                <div class="col-md-6 pt-5 px-5">
+                <div class="col-md-8 pt-5 px-5">
                     <h3 class="text-center"><b>Edit Announcement</b></h3>
 
                     <?php

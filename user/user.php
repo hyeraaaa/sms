@@ -1,5 +1,5 @@
 <?php
-require_once '../login/dbh.inc.php'; // DATABASE CONNECTION
+require_once '../login/dbh.inc.php';
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: ../login/login.php");
